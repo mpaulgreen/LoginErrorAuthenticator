@@ -16,7 +16,6 @@ public class LoginErrorAuthenticator implements Authenticator {
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
-        System.out.println("Authenticate method called");
         context.challenge(createForm(context, null));
     }
 
@@ -45,7 +44,6 @@ public class LoginErrorAuthenticator implements Authenticator {
     }
 
     private Response createForm(AuthenticationFlowContext context, Consumer<LoginFormsProvider> formConsumer) {
-        System.out.println("createForm called");
         LoginFormsProvider form = context.form();
         return form.createForm("loginerror.ftl");
     }
