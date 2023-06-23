@@ -9,7 +9,6 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 
 import javax.ws.rs.core.Response;
-import java.util.function.Consumer;
 
 public class LoginErrorAuthenticator implements Authenticator {
     private static final Logger logger = Logger.getLogger(LoginErrorAuthenticator.class);
