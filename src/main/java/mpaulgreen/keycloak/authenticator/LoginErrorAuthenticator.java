@@ -2,8 +2,8 @@ package mpaulgreen.keycloak.authenticator;
 
 import org.jboss.logging.Logger;
 import org.keycloak.authentication.AuthenticationFlowContext;
+import org.keycloak.authentication.AuthenticationFlowError;
 import org.keycloak.authentication.Authenticator;
-import org.keycloak.forms.login.LoginFormsProvider;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
@@ -16,7 +16,8 @@ public class LoginErrorAuthenticator implements Authenticator {
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
-        context.challenge(createForm(context, null));
+        Response challenge = context.form().createForm("loginerror.ftl");
+        context.failure(AuthenticationFlowError.ACCESS_DENIED,challenge);
     }
 
     @Override
@@ -41,11 +42,6 @@ public class LoginErrorAuthenticator implements Authenticator {
     @Override
     public void close() {
 
-    }
-
-    private Response createForm(AuthenticationFlowContext context, Consumer<LoginFormsProvider> formConsumer) {
-        LoginFormsProvider form = context.form();
-        return form.createForm("loginerror.ftl");
     }
 
 }
